@@ -1,11 +1,16 @@
 import React from 'react';
 import { ContactForm } from './ContactForm';
 import { ContactList } from './ContactList';
+import { Header } from "./Header";
 
 export const App = () => (
-  <div className='content'>
-    <h1>Ye Old Meteor Wallet</h1>
-    <ContactForm />
-    <ContactList />
+  <div>
+    <Header />
+    <div className='min-h-full'>
+      <div className='max-w-4xl p-2 mx-auto'>
+        <ContactForm />
+        <ContactList />
+      </div>
+    </div>
   </div>
 );
