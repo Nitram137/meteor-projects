@@ -3,12 +3,12 @@ import { ContactsCollection } from "../api/ContactsCollection";
 import { useSubscribe, useFind } from "meteor/react-meteor-data";
 
 export const ContactList = () => {
-  const isLoading = useSubscribe('allContacts');
-  const contacts = useFind(() => ContactsCollection.find({}, {sort: {createdAt: -1}}));
+  const isLoading = useSubscribe('contacts');
+  const contacts = useFind(() => ContactsCollection.find({ archived: {$ne: true}}, {sort: {createdAt: -1}}));
   
-  const removeContact = (event, _id) => {
+  const archiveContact = (event, _id) => {
     event.preventDefault();
-    Meteor.call('contacts.remove', {contactId: _id });
+    Meteor.call('contacts.archive', {contactId: _id });
   }
 
   if(isLoading()) {
@@ -33,7 +33,13 @@ export const ContactList = () => {
           <p className="text-sm font-medium text-gray-500 truncate">{contact.email}</p>
         </div>
         <div>
-          <a href="#" onClick={(e) => removeContact(e, contact._id)} className="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-grey-700 bg-white hover:bg-grey-50">Remove</a>
+          <a
+            href="#"
+            onClick={(event) => archiveContact(event, contact._id)}
+            className="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50"
+          >
+            Archive
+          </a>
         </div>
       </div>
     </li>
