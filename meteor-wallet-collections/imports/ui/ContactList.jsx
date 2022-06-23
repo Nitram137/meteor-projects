@@ -31,6 +31,7 @@ export const ContactList = () => {
         <div className="flex-1 min-w-0">
           <p className="text-sm font-medium text-gray-900 truncate">{contact.name}</p>
           <p className="text-sm font-medium text-gray-500 truncate">{contact.email}</p>
+          <p className="text-sm font-medium text-gray-500 truncate">{contact.walletId}</p>
         </div>
         <div>
           <a
