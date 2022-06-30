@@ -1,15 +1,18 @@
-import React from 'react';
-import { Fragment, useRef } from 'react';
-import { Dialog, Transition } from '@headlessui/react';
-
+import React from "react";
+import { Fragment, useRef } from "react";
+import { Dialog, Transition } from "@headlessui/react";
 
 export const Modal = ({ open, setOpen, title, body, footer, errorMessage }) => {
+  const cancelButtonRef = useRef(null);
 
-    const cancelButtonRef = useRef(null);
-
-    return (
-        <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
+  return (
+    <Transition.Root show={open} as={Fragment}>
+      <Dialog
+        as="div"
+        className="relative z-10"
+        initialFocus={cancelButtonRef}
+        onClose={setOpen}
+      >
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -35,15 +38,20 @@ export const Modal = ({ open, setOpen, title, body, footer, errorMessage }) => {
             >
               <Dialog.Panel className="relative overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:max-w-lg sm:w-full">
                 <div className="px-4 pt-5 pb-4 bg-white sm:p-6 sm:pb-4">
-                  <div className="sm:flex sm:items-start">
-                    <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                      <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
-                        {title}
-                      </Dialog.Title>
-                      <div className="mt-2">
-                        {errorMessage && (<h3 className="text-sm font-medium text-red-800">{errorMessage}</h3>)}
-                        {body}
-                      </div>
+                  <div>
+                    <Dialog.Title
+                      as="h3"
+                      className="text-lg font-medium leading-6 text-gray-900"
+                    >
+                      {title}
+                    </Dialog.Title>
+                    <div className="mt-2">
+                      {errorMessage && (
+                        <h3 className="text-sm font-medium text-red-800">
+                          {errorMessage}
+                        </h3>
+                      )}
+                      {body}
                     </div>
                   </div>
                 </div>
@@ -56,6 +64,5 @@ export const Modal = ({ open, setOpen, title, body, footer, errorMessage }) => {
         </div>
       </Dialog>
     </Transition.Root>
-    )
-}
-
+  );
+};
